@@ -1,0 +1,25 @@
+body{
+    
+    font-family: 'Montserrat', sans-serif !important;
+
+}
+.top_bar{
+    padding: 12px;
+    float: right;
+    border-radius: 0px;
+}
+
+.form-control, .form-control-sm, select, textarea {
+   border: 1px solid  #01a6cf !important;
+   border-radius: 2px;
+  }
+  .form-control:focus, .form-control-sm:focus, select:focus, textarea:focus {
+      box-shadow: none;
+      background-color:  #01a6cf1f;      ;
+  }
+  .content_box{
+      margin-top: 75px;
+  }
+  .navbar__sub-list{
+      margin-bottom: 25px;
+  }
