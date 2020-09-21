@@ -117,6 +117,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+from django.contrib import messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [

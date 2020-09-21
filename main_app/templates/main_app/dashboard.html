@@ -6,14 +6,91 @@
 
 {% block content %}
 
-<div  class="content_box">
-<div >
-<h5>Hello world
-    fdksjf;
-    fkdjs;
-</h5>
+<!-- starting one section -->
+<section class="statistic content_box">
+    <div class="section__content section__content--p30">
+    <div class="container-fluid">
+    <div class="row">
+   
+        <form id="main_search_form" class="form-header" action="" method="POST" _lpchecked="1">
+            <input id="visitor_search_button" class="au-input au-input--xl" type="text" name="search" placeholder="Type to search ...">
+            <button class="au-btn--submit" disabled >
+            <i class="zmdi zmdi-search"></i>
+            </button>
+            </form>
+    </div>
+    </div>
+    </div>
+    </section >
+
+<div class="row" id="search_result_row">
+<div class="col-md-12">
+    <div class="card " style="background-color: #e5e5e5;">
+        <div class="card-header">
+        <strong class="card-title">Search Results...</strong>
+        </div>
+        <div class="card-body">
+            <div id="visitor_search_result" class="row">
+            
+            </div>
+        </div>
+        </div>
 </div>
+
+
 </div>
+
+    
+
+
+
+
+
+
+
+  
+<script>
+    $(document).ready(function(){
+        $('#visitor_search_button').keyup(function() {
+  
+  // If value is not empty
+  if ($(this).val().length == 0) {
+    // Hide the element
+    $('#search_result_row').hide();
+  } else {
+    // Otherwise show it
+    $('#search_result_row').show();
+  }
+}).keyup(); 
+    })
+ 
+</script>
+
+
+
+    <script>
+     
+           $('#visitor_search_button').keydown(function(){
+    
+               $.ajax({
+                   
+                   type: 'POST',
+                   url: "{% url 'visitor_search' %}",
+                   data: {'data':$('#visitor_search_button').val(),
+                       csrfmiddlewaretoken: '{{ csrf_token }}'},
+            
+                   success: function(msg){
+                       $('#visitor_search_result').html(msg)
+                   }
+               })
+           })
+       
+    </script>
+<!-- ending one section -->
+
+
+
+
 
      
        
