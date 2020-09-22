@@ -85,3 +85,10 @@ label{
         margin-top: 12px;
     }
   }
+
+  .account2 {
+      padding: 0px;
+  }
+.navbar-sidebar2 .navbar__list li a {
+      padding: 10px  !important;
+  }
