@@ -7,6 +7,8 @@ from django.contrib import messages
 from django.http import HttpResponse
 from .models import *
 from django.db.models import Q
+from .forms import *
+from django.utils import timezone
 # Create your views here.
 
 
@@ -16,8 +18,29 @@ class HomeView(View):
 
 
 class DashboardView(View):
+    
     def get(self, request):
-        return render(request, 'main_app/dashboard.html')
+        form = VisitorForm()
+        context = {
+            'form':form
+        }
+        return render(request, 'main_app/dashboard.html', context)
+    
+    def post(self, request):
+        form = VisitorForm(request.POST)
+        if form.is_valid():
+            form.instance.Organization = request.user.profile
+            form.instance.first_Visit = timezone.now()
+            form.save()
+            messages.success(request,'Added successfully!')
+            return redirect('dashboard')
+        else:
+            context={
+                'form':form
+            }
+            return render(request, 'main_app/dashboard.html', context)
+        return render(request, 'main_app/dashboard.html', )
+
 
 def visitor_search_ajax(request):
     data= request.POST.get('data').strip()

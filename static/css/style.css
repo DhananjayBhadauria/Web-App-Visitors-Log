@@ -30,10 +30,24 @@ label{
    border: 1px solid  #01a6cf !important;
    border-radius: 2px;
   }
+  /* input, select, textarea{
+    border: 1px solid  #01a6cf !important;
+    border-radius: 2px !important;
+    width: 100%;
+    margin: auto;
+  }
+
+  input:focus, select:focus, textarea:focus{
+    box-shadow: none;
+    background-color:  #01a6cf1f;  
+    box-shadow: 0px 0px 10px 2px lightskyblue; 
+   
+  } */
+
   .form-control:focus, .form-control-sm:focus, select:focus, textarea:focus {
       box-shadow: none;
       background-color:  #01a6cf1f;  
-      box-shadow: 0px 0px 10px 2px lightskyblue;    ;
+      box-shadow: 0px 0px 10px 2px lightskyblue;
   }
   .content_box{
       margin-top: 75px;
@@ -73,7 +87,7 @@ label{
         width: 32%; margin-top: 3px auto;
     }
     .content_box{
-        margin-top: 12px;
+        margin-top: -28px;
     }
   }
 
@@ -82,7 +96,7 @@ label{
         width: 98%; margin-top: 3px auto;
     }
     .content_box{
-        margin-top: 12px;
+        margin-top: -28px;
     }
   }
 
@@ -92,3 +106,13 @@ label{
 .navbar-sidebar2 .navbar__list li a {
       padding: 10px  !important;
   }
+label{
+    margin-bottom: 0px !important;
+    margin-top: 6px !important;
+}
+button.close{
+    padding: 9px !important;
+}
+.alert{
+    padding: 7px;
+}

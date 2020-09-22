@@ -12,10 +12,10 @@
 
     <!-- Title Page-->
     <title>
-    {% block title %}
-        
-    {% endblock title %}
-        </title>
+        {% block title %}
+
+        {% endblock title %}
+    </title>
 
     <!-- Fontfaces CSS-->
     <link href="{% static 'css/font-face.css' %}" rel="stylesheet" media="all">
@@ -28,7 +28,8 @@
 
     <!-- Vendor CSS-->
     <link href="{% static 'vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
-    <link href="{% static 'vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet"
+        media="all">
     <link href="{% static 'vendor/wow/animate.css' %}" rel="stylesheet" media="all">
     <link href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
     <link href="{% static 'vendor/slick/slick.css' %}" rel="stylesheet" media="all">
@@ -40,16 +41,18 @@
     <link href="{% static 'css/theme.css' %}" rel="stylesheet" media="all">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-        <!-- Jquery JS-->
-        <script src="{% static 'vendor/jquery-3.2.1.min.js' %}"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{% static 'vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Jquery JS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+
+   
 </head>
 
 <body class="animsition">
-      <!-- MENU SIDEBAR-->
-      <aside class="menu-sidebar2">
-      
+    <!-- MENU SIDEBAR-->
+    <aside class="menu-sidebar2">
+
         <div class="menu-sidebar2__content js-scrollbar1">
             <div class="account2">
                 <div class="image ">
@@ -63,26 +66,26 @@
                     <li class="active has-sub">
                         <a class="js-arrow" href="#">
                             <i class="fas fa-tachometer-alt"></i>Dashboard
-                          
+
                         </a>
-                      
+
                     </li>
                     <li>
                         <a href="inbox.html">
                             <i class="fas fa-chart-bar"></i>Inbox</a>
-                       
+
                     </li>
                     <li>
                         <a href="#">
                             <i class="fas fa-shopping-basket"></i>eCommerce</a>
-                    </li>         
+                    </li>
                 </ul>
             </nav>
         </div>
     </aside>
     <!-- END MENU SIDEBAR-->
-       <!-- PAGE CONTAINER-->
-       <div class="page-container2">
+    <!-- PAGE CONTAINER-->
+    <div class="page-container2">
         <!-- HEADER DESKTOP-->
         <header class="header-desktop2">
             <div class="section__content section__content--p30">
@@ -94,9 +97,15 @@
                             </a>
                         </div>
                         <div class="header-button2">
-                            <div class="header-button-item js-item-menu"><i class="zmdi zmdi-plus-circle-o animated infinite wobble zmdi-hc-fw"></i>
+                          
+                            <div class="header-button-item ">
+                                <button data-toggle="modal" data-target="#addvmodal">
+                                    <i class="zmdi text-white zmdi-plus-circle-o animated infinite wobble zmdi-hc-fw" ></i>
+                               
+                                </button>
                                 
                             </div>
+
 
 
 
@@ -104,7 +113,8 @@
                                 <i class="zmdi zmdi-search"></i>
                                 <div class="search-dropdown js-dropdown">
                                     <form action="">
-                                        <input class="au-input au-input--full au-input--h65" type="text" placeholder="Search for datas &amp; reports..." />
+                                        <input class="au-input au-input--full au-input--h65" type="text"
+                                            placeholder="Search for datas &amp; reports..." />
                                         <span class="search-dropdown__icon">
                                             <i class="zmdi zmdi-search"></i>
                                         </span>
@@ -192,11 +202,11 @@
             </div>
         </header>
         <div class="page-wrapper">
-  
 
- 
+
+
             <aside class="menu-sidebar2 js-right-sidebar d-block d-lg-none">
-             
+
                 <div class="menu-sidebar2__content js-scrollbar1">
                     <div class="account2">
                         <div class="image ">
@@ -210,57 +220,124 @@
                             <li class="active has-sub">
                                 <a class="js-arrow" href="#">
                                     <i class="fas fa-tachometer-alt"></i>Dashboard
-                                  
+
                                 </a>
-                              
+
                             </li>
                             <li>
                                 <a href="inbox.html">
                                     <i class="fas fa-chart-bar"></i>Inbox</a>
-                               
+
                             </li>
                             <li>
                                 <a href="#">
                                     <i class="fas fa-shopping-basket"></i>eCommerce</a>
-                            </li>         
+                            </li>
                         </ul>
                     </nav>
                 </div>
             </aside>
             <!-- END HEADER DESKTOP-->
+
+            <section class="statistic content_box">
+  
     
-    {% block content %}
+                <div class="section__content section__content--p30">
+                    
+                <div class="container-fluid">
+                    {% if messages %}
+                    {% for message in messages %}
+                      <div {% if message.tags %} class="alert alert-dismissible alert-{{message.tags}}"{% endif %}>
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{message}} 
+                      </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+             
+                </div>
+                </div>
+                </section >
+           
+            {% block content %}
+
+            {% endblock content %}
+
+
+
+    <!-- starting add visitor modal  -->
+  <!-- The Modal -->
+  <div class="modal " id="addvmodal">
+      <div class="modal-dialog-add-v ">
+<div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="text-primary">Add New</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
         
-    {% endblock content %}
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form method="POST">
+                {% csrf_token %}
+                {% for f in form %}
+                <div class="row">
+    <div class="col-md-12"><label>{{f.label}}</label> {{f}}</div>
+    
+                </div>
+            {% endfor %}
+            <input type="submit" style="margin: 10px 0px;" class=" btn btn-success" value="Add">
+            </form>       
+        </div>
         
-   
+     
+      </div>
+    </div>
+      </div>
+    
+  </div>
+    <!-- ending add visitor modal -->
 
+            <!-- Bootstrap JS-->
+            <script src="{% static 'vendor/bootstrap-4.1/popper.min.js' %}"></script>
+            <script src="{% static 'vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+            <!-- Vendor JS       -->
+            <script src="{% static 'vendor/slick/slick.min.js' %}">
+            </script>
+            <script src="{% static 'vendor/wow/wow.min.js' %}"></script>
+            <script src="{% static 'vendor/animsition/animsition.min.js' %}"></script>
+            <script src="{% static 'vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+            </script>
+            <script src="{% static 'vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+            <script src="{% static 'vendor/counter-up/jquery.counterup.min.js' %}">
+            </script>
+            <script src="{% static 'vendor/circle-progress/circle-progress.min.js' %}"></script>
+            <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+            <script src="{% static 'vendor/chartjs/Chart.bundle.min.js' %}"></script>
+            <script src="{% static 'vendor/select2/select2.min.js' %}">
+            </script>
+            <script src="{% static 'vendor/vector-map/jquery.vmap.js' %}"></script>
+            <script src="{% static 'vendor/vector-map/jquery.vmap.min.js' %}"></script>
+            <script src="{% static 'vendor/vector-map/jquery.vmap.sampledata.js' %}"></script>
+            <script src="{% static 'vendor/vector-map/jquery.vmap.world.js' %}"></script>
 
-    <!-- Bootstrap JS-->
-    <script src="{% static 'vendor/bootstrap-4.1/popper.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
-    <!-- Vendor JS       -->
-    <script src="{% static 'vendor/slick/slick.min.js' %}">
-    </script>
-    <script src="{% static 'vendor/wow/wow.min.js' %}"></script>
-    <script src="{% static 'vendor/animsition/animsition.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
-    </script>
-    <script src="{% static 'vendor/counter-up/jquery.waypoints.min.js' %}"></script>
-    <script src="{% static 'vendor/counter-up/jquery.counterup.min.js' %}">
-    </script>
-    <script src="{% static 'vendor/circle-progress/circle-progress.min.js' %}"></script>
-    <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
-    <script src="{% static 'vendor/chartjs/Chart.bundle.min.js' %}"></script>
-    <script src="{% static 'vendor/select2/select2.min.js' %}">
-    </script>
-    <script src="{% static 'vendor/vector-map/jquery.vmap.js' %}"></script>
-    <script src="{% static 'vendor/vector-map/jquery.vmap.min.js' %}"></script>
-    <script src="{% static 'vendor/vector-map/jquery.vmap.sampledata.js' %}"></script>
-    <script src="{% static 'vendor/vector-map/jquery.vmap.world.js' %}"></script>
-
-    <!-- Main JS-->
-    <script src="{% static 'js/main.js' %}"></script>
+            <!-- Main JS-->
+            <script src="{% static 'js/main.js' %}"></script>
 
 </body>
 

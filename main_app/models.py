@@ -20,7 +20,7 @@ class Visitor(models.Model):
       first_Visit = models.DateTimeField(null=True, blank=True)
 
 
-      address = models.TextField(null=True, blank=True)
+      address = models.TextField(null=True)
 
       def __str__(self):
             return self.full_Name
