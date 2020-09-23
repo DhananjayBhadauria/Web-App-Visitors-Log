@@ -131,3 +131,19 @@ button.close{
 .visitor_info{
     color: white;
 }
+.page-wrapper {
+    overflow: hidden;
+}
+.visits_box{
+    max-height: 80vh;
+    overflow-y: scroll;
+}
+.full_height{
+    max-height: 100vh;
+}
+.vfh{
+    font-weight: bolder;
+}
+input[type='submit']{
+    margin: 5px 0px;
+}

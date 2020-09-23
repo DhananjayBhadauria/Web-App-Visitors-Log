@@ -6,7 +6,7 @@ from django.contrib import auth
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
-from django.db.models import Q
+from django.db.models import Q, Max
 from .forms import *
 from django.utils import timezone
 from django.urls import reverse
@@ -31,7 +31,7 @@ class DashboardView(View):
         form = VisitorForm(request.POST)
         if form.is_valid():
             form.instance.Organization = request.user.profile
-            form.instance.first_Visit = timezone.now()
+            form.instance.date_Registered = timezone.now()
             new_visitor = form.save()
             messages.success(request,'Added successfully!')
             return HttpResponseRedirect(reverse('visitor_details', kwargs={'pk':new_visitor.id}))
@@ -76,12 +76,52 @@ def logout_user(request):
 class VisitorDetail(View):
     form = VisitorForm()
     
+    
     def get(self, request, pk):
         visitor = Visitor.objects.get(id=pk, Organization= request.user.profile)
-        total_visits = visitor.visits.all().count()
+        total_visits = visitor.visits.all()
+        add_visit_form = VisitAddForm(initial={'visitor':visitor.full_Name,'visit_Date':timezone.now() })
         context = {
             "form":self.form,
             'visitor':visitor,
-            'total_visits': total_visits
+            'total_visits': total_visits,
+            'add_visit_form':add_visit_form
         }
         return render(request, 'main_app/visitor_detail.html', context)
+
+    def post(self, request, pk):
+        visitor = Visitor.objects.get(id=pk, Organization= request.user.profile)
+        total_visits = visitor.visits.all()
+        add_visit_form = VisitAddForm(request.POST)
+        
+        if add_visit_form.is_valid():
+            add_visit_form.instance.Organization = request.user.profile
+            add_visit_form.instance.visitor = visitor
+            
+            saved_visit = add_visit_form.save(commit=False)
+            # starting logic for visit no.
+            visits = VisitDetails.objects.filter(visitor= saved_visit.visitor)
+            max_visit_no =  visits.aggregate(Max('visit_Number'))
+            
+            if max_visit_no['visit_Number__max'] is None:
+                saved_visit.visit_Number = 1
+                saved_visit.save() 
+            else:
+                saved_visit.visit_Number = max_visit_no['visit_Number__max']+1
+                messages.success(request, 'Created successfully!')
+                saved_visit.save()  
+            # ending logic for visit no.
+            return HttpResponseRedirect(reverse('visitor_details', kwargs={'pk':visitor.id}))
+        else:
+            add_visit_form = add_visit_form
+            print(add_visit_form.errors)
+        context = {
+            "form":self.form,
+            'visitor':visitor,
+            'total_visits': total_visits,
+            'add_visit_form':add_visit_form
+        }
+        return render(request, 'main_app/visitor_detail.html', context)
+
+
+

@@ -17,7 +17,7 @@ class Visitor(models.Model):
       contact_Number = models.CharField(max_length=13)
       alternate_Contact_Number = models.CharField(max_length=13, null=True, blank=True)
       email = models.EmailField(null=True, blank=True)
-      first_Visit = models.DateTimeField(null=True, blank=True)
+      date_Registered = models.DateTimeField(null=True, blank=True)
 
 
       address = models.TextField(null=True)
@@ -26,6 +26,11 @@ class Visitor(models.Model):
             return self.full_Name
 
 class VisitDetails(models.Model):
+      Organization = models.ForeignKey(to=UserProfile, null=True, blank=True, on_delete=models.SET_NULL, related_name='org_visits' )
       visitor = models.ForeignKey(to=Visitor, on_delete=models.CASCADE, null=True, blank=True, related_name='visits')
+      visit_Number = models.IntegerField(null=True, blank=True)
       visit_Date = models.DateTimeField(null=True, blank=True)
       Description = models.TextField(null=True, blank=True)
+
+      def __str__(self):
+            return ("%s, %s") %(self.visitor, self.visit_Number)

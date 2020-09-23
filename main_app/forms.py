@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Visitor
+from .models import *
 from django import forms
 
 class VisitorForm(ModelForm):
@@ -15,4 +15,16 @@ class VisitorForm(ModelForm):
             'alternate_Contact_Number':forms.TextInput(attrs={'class':'form-control form-control-sm'}),
             
            
+        }
+
+class VisitAddForm(forms.ModelForm):
+    class Meta:
+        model = VisitDetails
+        fields = ['visit_Date','Description']
+
+        widgets ={
+          
+         
+            'visit_Date':forms.TextInput(attrs={'readonly':'readonly','class':'form-control'}),
+            'Description': forms.Textarea(attrs={'rows':3,'class':'form-control'})
         }
