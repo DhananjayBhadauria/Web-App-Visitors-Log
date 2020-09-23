@@ -4,11 +4,12 @@ from django.contrib.auth import logout, login
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 from django.db.models import Q
 from .forms import *
 from django.utils import timezone
+from django.urls import reverse
 # Create your views here.
 
 
@@ -31,9 +32,9 @@ class DashboardView(View):
         if form.is_valid():
             form.instance.Organization = request.user.profile
             form.instance.first_Visit = timezone.now()
-            form.save()
+            new_visitor = form.save()
             messages.success(request,'Added successfully!')
-            return redirect('dashboard')
+            return HttpResponseRedirect(reverse('visitor_details', kwargs={'pk':new_visitor.id}))
         else:
             context={
                 'form':form
@@ -71,3 +72,16 @@ def logout_user(request):
     logout(request)
     messages.success(request, "User logged out!")
     return redirect('home')
+
+class VisitorDetail(View):
+    form = VisitorForm()
+    
+    def get(self, request, pk):
+        visitor = Visitor.objects.get(id=pk, Organization= request.user.profile)
+        total_visits = visitor.visits.all().count()
+        context = {
+            "form":self.form,
+            'visitor':visitor,
+            'total_visits': total_visits
+        }
+        return render(request, 'main_app/visitor_detail.html', context)

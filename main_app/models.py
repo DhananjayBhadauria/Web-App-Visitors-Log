@@ -15,7 +15,7 @@ class Visitor(models.Model):
       Organization = models.ForeignKey(to=UserProfile, null=True, blank=True, on_delete=models.SET_NULL, related_name='org_visitors' )
       full_Name = models.CharField(max_length=40)
       contact_Number = models.CharField(max_length=13)
-      alternate_Contact_Number = models.CharField(max_length=13)
+      alternate_Contact_Number = models.CharField(max_length=13, null=True, blank=True)
       email = models.EmailField(null=True, blank=True)
       first_Visit = models.DateTimeField(null=True, blank=True)
 
@@ -24,3 +24,8 @@ class Visitor(models.Model):
 
       def __str__(self):
             return self.full_Name
+
+class VisitDetails(models.Model):
+      visitor = models.ForeignKey(to=Visitor, on_delete=models.CASCADE, null=True, blank=True, related_name='visits')
+      visit_Date = models.DateTimeField(null=True, blank=True)
+      Description = models.TextField(null=True, blank=True)
