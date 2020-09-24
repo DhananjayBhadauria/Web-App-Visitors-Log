@@ -18,9 +18,8 @@ class Visitor(models.Model):
       alternate_Contact_Number = models.CharField(max_length=13, null=True, blank=True)
       email = models.EmailField(null=True, blank=True)
       date_Registered = models.DateTimeField(null=True, blank=True)
-
-
       address = models.TextField(null=True)
+      photo = models.ImageField(upload_to="visitors_photos/", null=True, blank=True, default="/default_visitor.png")
 
       def __str__(self):
             return self.full_Name

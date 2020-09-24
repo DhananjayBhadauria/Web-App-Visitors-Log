@@ -1,4 +1,5 @@
 
+{% if visitors %}
 {% for visitor in visitors %}
 
 <div class="card " id="visitor_search_card" >
@@ -30,4 +31,15 @@
       </div>
       </div>
 {% endfor %}
+      
+{% else %}
+<p style="text-align: center; width: 75%; margin: auto;">No Matching Result Found...</p>
+<br>
+<br>
+<div style="width: 75%; margin: auto; border: 1px solid lightskyblue; text-align: center; display: block; padding: 25px;">
+<p>Hint: Type atleast 3 characters and hit enter...</p>
+</div>
+
+
+{% endif %}
       

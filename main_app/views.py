@@ -45,9 +45,13 @@ class DashboardView(View):
 
 def visitor_search_ajax(request):
     data= request.POST.get('data').strip()
+    
     visitors = Visitor.objects.filter(Q(full_Name__icontains=data, Organization=request.user.profile)|
     Q(contact_Number__icontains=data, Organization=request.user.profile)
     )
+    if len(data) <2:
+        visitors = []
+
     return render(request, 'main_app/visitors_search.html', {'visitors':visitors})
 
 def login(request):
@@ -79,7 +83,7 @@ class VisitorDetail(View):
     
     def get(self, request, pk):
         visitor = Visitor.objects.get(id=pk, Organization= request.user.profile)
-        total_visits = visitor.visits.all()
+        total_visits = visitor.visits.all().order_by('-visit_Number')
         add_visit_form = VisitAddForm(initial={'visitor':visitor.full_Name,'visit_Date':timezone.now() })
         context = {
             "form":self.form,

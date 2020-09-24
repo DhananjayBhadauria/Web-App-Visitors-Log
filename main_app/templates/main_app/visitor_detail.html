@@ -34,7 +34,7 @@
                         <div class="card-header user-header alt bg-dark">
                         <div class="media">
                         <a href="#">
-                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="images/icon/avatar-01.jpg">
+                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="{{visitor.photo.url}}">
                         </a>
                         <div class="media-body">
                         <h3 class="text-light display-6">{{visitor.full_Name}}</h3>
@@ -51,14 +51,36 @@
                               </div>
                           
                         </div>
-                        <ul class="list-group list-group-flush">
+                        <ul class="list-group list-group-flush vdpc">
                         <li class="list-group-item">
                         <a href="#">
                         <i class="fa fa-envelope-o"></i>
-                        Total Visits: {{total_visits.count}}
+                        Total Visits: <span class="vpi">{{total_visits.count}}</span> 
                         </a>
                         </li>
+
+                        <li class="list-group-item">
+                          <a href="#">
+                          <i class="fa fa-envelope-o"></i>
+                          Alternative Contact: <span class="vpi">{{visitor.alternate_Contact_Number|default:"Not Provided"}}</span> 
+                          </a>
+                          </li>
+
+                          
+                        <li class="list-group-item">
+                          <a href="#">
+                          <i class="fa fa-envelope-o"></i>
+                          Email: <span class="vpi">{{visitor.email|default:"Not Provided"}}</span> 
+                          </a>
+                          </li>
                        
+                          
+                        <li class="list-group-item">
+                          <a href="#">
+                          <i class="fa fa-envelope-o"></i>
+                          Address: <span class="vpi">{{visitor.address|default:"Not Provided"}}</span> 
+                          </a>
+                          </li>
                       
                         </ul>
                         </section>
@@ -84,23 +106,18 @@
                         
                   
             
-
-               
-
-                  <div id="accordion" class="visits_accordian" >
-            
                         
  {% if total_visits %}
-                              
+ <div id="accordion" class="visits_accordian" >                    
  {% for v in total_visits %}
  <div class="card">
-      <div class="card-header">
+      <div class="card-header vnh">
         <a class="card-link" data-toggle="collapse" href="#{{v.id}}">
-         {{v.visit_Date}}
+          <i class="zmdi zmdi-chevron-right"></i> {{v.visit_Date}}
         </a>
       </div>
-      <div id="{{v.id}}" class="collapse show" data-parent="#accordion">
-        <div class="card-body">
+      <div id="{{v.id}}" class="collapse " data-parent="#accordion">
+        <div class="card-body vnb">
             {{v.Description}}
         </div>
       </div>

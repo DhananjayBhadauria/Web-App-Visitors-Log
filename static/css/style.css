@@ -2,6 +2,8 @@ body{
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif !important;
     margin: auto;
+    color: black !important;
+    font-weight: 600;
 }
 
 p{
@@ -9,7 +11,7 @@ p{
     font-style: normal;
 }
 label{
-    font-size: 17px;
+   
 }
 
 
@@ -134,10 +136,10 @@ button.close{
 .page-wrapper {
     overflow: hidden;
 }
-.visits_box{
+/* .visits_box{
     max-height: 80vh;
     overflow-y: scroll;
-}
+} */
 .full_height{
     max-height: 100vh;
 }
@@ -146,4 +148,16 @@ button.close{
 }
 input[type='submit']{
     margin: 5px 0px;
+}
+.vnh{
+    padding: 3px 15px;
+}
+.vnb{
+    padding: 2px 30px;
+}
+.vdpc .list-group-item{
+    padding: 4px ;
+}
+.vpi{
+    color: black;
 }
