@@ -161,3 +161,11 @@ input[type='submit']{
 .vpi{
     color: black;
 }
+.info_head{
+    color: teal;
+    font-weight: bolder;
+}
+#visitor_search_card:hover{
+border: 1px solid lightseagreen;
+box-shadow: 0px 0px 6px 3px lightskyblue;
+}
