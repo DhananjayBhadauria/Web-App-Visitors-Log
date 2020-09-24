@@ -99,6 +99,8 @@ class VisitorDetail(View):
             add_visit_form.instance.visitor = visitor
             
             saved_visit = add_visit_form.save(commit=False)
+            visitor.last_visit = saved_visit.visit_Date #updating visitors last visit value
+            visitor.save()
             # starting logic for visit no.
             visits = VisitDetails.objects.filter(visitor= saved_visit.visitor)
             max_visit_no =  visits.aggregate(Max('visit_Number'))
@@ -109,7 +111,9 @@ class VisitorDetail(View):
             else:
                 saved_visit.visit_Number = max_visit_no['visit_Number__max']+1
                 messages.success(request, 'Created successfully!')
-                saved_visit.save()  
+                saved_visit.save()
+                
+                
             # ending logic for visit no.
             return HttpResponseRedirect(reverse('visitor_details', kwargs={'pk':visitor.id}))
         else:
