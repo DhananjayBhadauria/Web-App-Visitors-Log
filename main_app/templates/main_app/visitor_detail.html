@@ -23,6 +23,25 @@
           </div>
       {% endfor %}
   {% endif %}
+
+
+
+  {% if visitor_detail_update_form.errors %}
+      {% for field in visitor_detail_update_form %}
+          {% for error in field.errors %}
+              <div class="alert alert-danger">
+                  <p style="color: red;">{{ error|escape }}</p>
+              </div>
+          {% endfor %}
+      {% endfor %}
+      {% for error in visitor_detail_update_form.non_field_errors %}
+          <div class="alert alert-danger">
+              <p style="color: red;">{{ error|escape }}</p>
+          </div>
+      {% endfor %}
+  {% endif %}
+
+
       <div >
 
             <div class="row ">
@@ -45,10 +64,37 @@
                         </div>
                         </div>
                         </div>
-                        <div class="row" style="float: left; padding: 3px 15px;">
-                              <div class="col-md-12">
-                                    <button class="btn btn-primary btn-sm" style="float: left;" data-toggle="modal" data-target="#addvisitmodal">Add Visit</button>
-                              </div>
+ <div class="row" style="float: left; padding: 3px 15px;">
+ <div class="col-md-12">
+<button class="btn btn-primary btn-sm"  style="float: left;" data-toggle="modal" data-target="#addvisitmodal">Add Visit</button>
+
+<button id="vis_pu" class="btn btn-warning btn-sm text-white" >Update Details</button>
+
+</div>
+<script>
+$('document').ready(function(){
+  $('#vis_pu').click(function(){
+    $('#vistpu').modal('show');
+  })
+})
+</script>
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                           
                         </div>
                         <ul class="list-group list-group-flush vdpc">
@@ -152,13 +198,11 @@
     <div class="modal" id="addvisitmodal">
       <div class="modal-dialog">
         <div class="modal-content">
-    
           <!-- Modal Header -->
           <div class="modal-header">
             <h4 class="modal-title">Adding Visit to {{visitor.full_Name}}</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
-    
           <!-- Modal body -->
           <div class="modal-body">
             <form method="POST" action="{% url 'visitor_details' visitor.pk %}">
@@ -167,16 +211,47 @@
                   <label>{{f.label}}</label>
                   {{f}}
             {% endfor %}
-            
             <input type="submit" class="btn btn-success" value="Add Visit" >
             </form>  
           </div>
-    
         </div>
       </div>
     </div>
 
 
+<!-- starting visitor details updata modal -->
+<div class="modal" id="vistpu">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+           <h4>Update profile</h4>
+            <button type="button" class="close btn btn-danger" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+          <form method="POST" action="{% url 'visitor_details_update' %}">
+          {% csrf_token %}
+          {% for f in visitor_detail_update_form %}
+          <div class="">
+          <label>{{f.label}}</label>
+          {{f}}
+          </div>
+            
+          {% endfor %}
+            <input type="hidden" value="{{visitor.id}}" name="visitor" >
+         
+           <input type="submit" value="Update Details" class="btn btn-success">
+          </form>
+          
+          
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<!-- ending visitor details update modal -->
 
 
 

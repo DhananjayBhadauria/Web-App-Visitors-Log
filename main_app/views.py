@@ -81,15 +81,18 @@ class VisitorDetail(View):
     form = VisitorForm()
     
     
+    
     def get(self, request, pk):
         visitor = Visitor.objects.get(id=pk, Organization= request.user.profile)
         total_visits = visitor.visits.all().order_by('-visit_Number')
         add_visit_form = VisitAddForm(initial={'visitor':visitor.full_Name,'visit_Date':timezone.now() })
+        visitor_detail_update_form = VisitorInfoUpdateForm(instance=visitor)
         context = {
             "form":self.form,
             'visitor':visitor,
             'total_visits': total_visits,
-            'add_visit_form':add_visit_form
+            'add_visit_form':add_visit_form,
+            'visitor_detail_update_form':visitor_detail_update_form
         }
         return render(request, 'main_app/visitor_detail.html', context)
 
@@ -132,4 +135,24 @@ class VisitorDetail(View):
         return render(request, 'main_app/visitor_detail.html', context)
 
 
-
+def visitor_detail_update_form_handle(request):
+    if request.method == "POST":
+        visitor = Visitor.objects.get(id=request.POST.get('visitor'))
+        visitor_detail_update_form = VisitorInfoUpdateForm(request.POST, instance=visitor)
+        if visitor_detail_update_form.is_valid():
+            visitor_detail_update_form.save()
+            messages.success(request, 'Visitors details updated successfully!')
+            
+        else:
+            visitor_detail_update_form=visitor_detail_update_form
+        form = VisitorForm()
+        total_visits = visitor.visits.all()
+        add_visit_form = VisitAddForm(initial={'visitor':visitor.full_Name,'visit_Date':timezone.now() })
+        context = {
+            "form":form,
+            'visitor':visitor,
+            'total_visits': total_visits,
+            'add_visit_form':add_visit_form,
+            'visitor_detail_update_form':visitor_detail_update_form
+        }
+        return render(request, 'main_app/visitor_detail.html', context)

@@ -13,9 +13,23 @@ class VisitorForm(ModelForm):
             'contact_Number':forms.TextInput(attrs={'class':'form-control form-control-sm'}),
             'email':forms.TextInput(attrs={'class':'form-control form-control-sm'}),
             'alternate_Contact_Number':forms.TextInput(attrs={'class':'form-control form-control-sm'}),
-            
-           
+              
         }
+
+class VisitorInfoUpdateForm(ModelForm):
+    class Meta:
+        model = Visitor
+        fields = ['full_Name','contact_Number','alternate_Contact_Number','email','address']
+
+        widgets = {
+            'address': forms.Textarea(attrs={'rows': 3, 'class':'form-control form-control-sm'}),
+            'full_Name': forms.TextInput(attrs={'class':'form-control form-control-sm'}),
+            'contact_Number':forms.TextInput(attrs={'class':'form-control form-control-sm'}),
+            'email':forms.TextInput(attrs={'class':'form-control form-control-sm'}),
+            'alternate_Contact_Number':forms.TextInput(attrs={'class':'form-control form-control-sm'}),
+              
+        }
+
 
 class VisitAddForm(forms.ModelForm):
     class Meta:
