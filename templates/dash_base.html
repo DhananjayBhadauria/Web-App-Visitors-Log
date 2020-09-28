@@ -212,7 +212,7 @@
                         <div class="image ">
                             <img src="{{user.profile.photo.url}}" class="img-fluid" alt="user_logo" />
                         </div>
-                        <h4 class="name text-center">{{user.profile.fullName}}</h4>
+                        <h4 class="name text-center">{{user.profile.fullName|default:"Edit profile to show name here..."}}</h4>
                         <a class="text-danger " href="{% url 'logout' %}">Sign out</a>
                     </div>
                     <nav class="navbar-sidebar2">

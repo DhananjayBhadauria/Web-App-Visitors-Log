@@ -9,6 +9,6 @@ urlpatterns = [
     path('logout/', views.logout_user, name="logout"),
     
     path('visitor_details/<int:pk>/', VisitorDetail.as_view(), name="visitor_details"),
-    path('visitor_details_updates/', views.visitor_detail_update_form_handle, name="visitor_details_update")
+    path('visitor_details_updates/', views.visitor_detail_update_form_handle, name="visitor_details_update"),
     path('profile/update/', OrganizationUpdateView.as_view(), name="org_update_view")
 ]   

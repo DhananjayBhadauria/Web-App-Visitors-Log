@@ -161,26 +161,29 @@ class OrganizationUpdateView(View):
     
 
     def get(self, request):
+        form = VisitorForm()
         current_user = UserProfile.objects.get(user = request.user)
         org_update_form = OrganizationUpdateForm(instance=current_user)
         context = {
-            'org_update_form':org_update_form
+            'org_update_form':org_update_form,
+            'form':form
         }
         return render(request, 'main_app/organization_update.html', context)
 
     def post(self, request):
+        form = VisitorForm()
         current_user = UserProfile.objects.get(user = request.user)
         org_update_form = OrganizationUpdateForm(request.POST, request.FILES ,instance=current_user)
         if org_update_form.is_valid():
             org_update_form.save()
             messages.success(request, 'Profile updated successfully!')
             org_update_form = OrganizationUpdateForm(instance=current_user)
-            
         else:
             org_update_form= org_update_form
-
+        
         context={
-            'org_update_form':org_update_form
+            'org_update_form':org_update_form,
+            'form':form
         }
         return render(request, 'main_app/organization_update.html', context)
 
