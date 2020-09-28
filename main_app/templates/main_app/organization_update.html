@@ -1,0 +1,45 @@
+{% extends 'dash_base.html' %}
+
+
+{% block title %}
+    Update Profile
+{% endblock title %}
+    
+
+{% block content %}
+   <div class="container-fluid">
+    {% if org_update_form.errors %}
+    {% for field in org_update_form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <p style="color: red;">{{ error|escape }}</p>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in org_update_form.non_field_errors %}
+        <div class="alert alert-danger">
+            <p style="color: red;">{{ error|escape }}</p>
+        </div>
+    {% endfor %}
+{% endif %}
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-info text-center">Updating Profile</h3>
+            <form style="width: 60%; margin: auto;" method="POST" enctype="multipart/form-data" 
+            action="{% url 'org_update_view' %}">
+{% csrf_token %}
+{% for f in org_update_form %}
+    <div class="row">
+<label>{{f.label}}</label>
+{{f}}
+    </div>
+{% endfor %}
+<input type="submit" value="Update Details" class="btn btn-success btn-block" >
+    
+            </form>
+     
+        </div>
+            </div>
+   </div>
+{% endblock content %}
+    

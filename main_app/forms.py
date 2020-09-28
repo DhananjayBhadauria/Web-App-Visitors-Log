@@ -28,3 +28,13 @@ class VisitAddForm(forms.ModelForm):
             'visit_Date':forms.TextInput(attrs={'readonly':'readonly','class':'form-control'}),
             'Description': forms.Textarea(attrs={'rows':3,'class':'form-control'})
         }
+
+class OrganizationUpdateForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['fullName','photo']
+
+        widgets = {
+            'fullName':forms.TextInput(attrs={'class':'form-control'}),
+            'photo': forms.FileInput(attrs={'class':'form-control'})
+        }
