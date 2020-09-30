@@ -187,3 +187,28 @@ class OrganizationUpdateView(View):
         }
         return render(request, 'main_app/organization_update.html', context)
 
+
+class EditVisitView(View):
+    def get(self, request):
+        pass
+    def post(self, request):
+        visit = VisitDetails.objects.get(id = request.POST.get('visit_id'))
+        visit_edit_form = EditVisitForm( request.POST, instance=visit)
+        if visit_edit_form.is_valid():
+            visit_edit_form.save()
+            messages.success(request, 'Visit details updated successfully!')
+        else:
+            messages.error(request, 'Failed to Update, please fill details correctly!')
+        visitor = visit.visitor
+        return HttpResponseRedirect(reverse('visitor_details', kwargs={'pk':visitor.id}))
+
+def ajax_edit_visit(request):
+    if request.method == "POST":
+        visit_id = request.POST.get('id')
+        visit_record = VisitDetails.objects.get(id=visit_id)
+        visit_edit_form = EditVisitForm(instance=visit_record)
+        context = {
+            'visit_edit_form':visit_edit_form,
+            'visit_id':visit_id
+        }
+        return render(request, 'main_app/edit_visit.html', context)

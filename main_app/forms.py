@@ -52,3 +52,13 @@ class OrganizationUpdateForm(forms.ModelForm):
             'fullName':forms.TextInput(attrs={'class':'form-control'}),
             'photo': forms.FileInput(attrs={'class':'form-control'})
         }
+
+
+class EditVisitForm(forms.ModelForm):
+    class Meta:
+        model = VisitDetails
+        fields = ['Description']
+
+        widgets ={
+            'Description': forms.Textarea(attrs={'class':'form-control', 'rows':4})
+        }

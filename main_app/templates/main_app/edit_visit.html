@@ -1,0 +1,6 @@
+<form method="POST" action="{% url 'editVisitView' %}">
+      {% csrf_token %}
+      {{visit_edit_form}}
+      <input type="hidden" value="{{visit_id}}" name="visit_id">
+      <input type="submit" value="Update Visit" class="btn btn-success" >
+</form>
