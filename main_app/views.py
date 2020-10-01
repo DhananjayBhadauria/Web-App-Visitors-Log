@@ -60,6 +60,9 @@ def login(request):
         password = request.POST['password']
         try:
             g_user = User.objects.get(email= username) # checkng whether user registered or not 
+            if not g_user.is_active:
+                messages.info(request, 'Your account is deactivated...')
+                return render(request, 'main_app/index.html')
             username = g_user.username
             user = auth.authenticate(username=username, password=password)
             if user is not None:

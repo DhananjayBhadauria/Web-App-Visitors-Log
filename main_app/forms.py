@@ -60,5 +60,5 @@ class EditVisitForm(forms.ModelForm):
         fields = ['Description']
 
         widgets ={
-            'Description': forms.Textarea(attrs={'class':'form-control', 'rows':4})
+            'Description': forms.Textarea(attrs={'class':'form-control', 'rows':6})
         }
