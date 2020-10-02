@@ -10,6 +10,8 @@ from django.db.models import Q, Max
 from .forms import *
 from django.utils import timezone
 from django.urls import reverse
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 # Create your views here.
 
 
@@ -215,3 +217,21 @@ def ajax_edit_visit(request):
             'visit_id':visit_id
         }
         return render(request, 'main_app/edit_visit.html', context)
+
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'accounts/change_password.html', {
+        'form': form
+    })

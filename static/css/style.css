@@ -171,3 +171,10 @@ box-shadow: 2px 2px 4px 2px lightskyblue;
 padding: 3px;
 transition: 0.1s;
 }
+.drop_link {
+    padding: 3px 10px;
+    margin: auto;
+}
+.drop_link:hover {
+ background-color: lightgray;
+}
