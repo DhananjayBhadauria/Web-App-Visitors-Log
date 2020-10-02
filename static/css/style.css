@@ -176,5 +176,7 @@ transition: 0.1s;
     margin: auto;
 }
 .drop_link:hover {
- background-color: lightgray;
+ background-color: rgba(211, 211, 211, 0.397);
+ color: white !important;
+ text-transform: none !important;
 }

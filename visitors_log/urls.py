@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main_app.urls')),
 
-path('password/', main_app_views.change_password, name='change_password'),
+path('password/change/', main_app_views.change_password, name='change_password'),
 
 
 
