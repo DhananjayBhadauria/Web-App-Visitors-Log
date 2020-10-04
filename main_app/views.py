@@ -235,3 +235,21 @@ def change_password(request):
     return render(request, 'accounts/change_password.html', {
         'form': form
     })
+
+
+class VisitorsByDateView(View):
+
+    def get(self, request):
+        return render(request, 'main_app/visitorsbydate.html')
+
+
+def ajax_visitors_by_date(request):
+    if request.method == "POST":
+            
+        sel_date = request.POST.get('date')
+        visitors = Visitor.objects.filter(Organization = request.user.profile, 
+        date_Registered__date = sel_date)
+        context = {
+            'visitors':visitors
+        }
+        return render(request, 'main_app/visiterByDatesearch.html', context)

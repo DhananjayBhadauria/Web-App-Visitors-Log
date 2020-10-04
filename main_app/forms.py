@@ -39,7 +39,7 @@ class VisitAddForm(forms.ModelForm):
         widgets ={
           
          
-            'visit_Date':forms.TextInput(attrs={'readonly':'readonly','class':'form-control'}),
+            'visit_Date':forms.TextInput(attrs={'readonly':'readonly','class':'form-control-plaintext'}),
             'Description': forms.Textarea(attrs={'rows':3,'class':'form-control'})
         }
 

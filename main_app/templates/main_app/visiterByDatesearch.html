@@ -1,0 +1,37 @@
+<!-- this page will display the ajax search result of date selected by user to get visiotor and added to visiter by date page using html -->
+{% if visitors %}
+{% for visitor in visitors %}
+
+<div class="card " id="visitor_search_card" >
+      <div class="card-header">
+            <a href="{% url 'visitor_details' visitor.pk %}">      <strong class="card-title mb-3">{{visitor.full_Name}}</strong></a>
+
+      </div>
+      <div class="card-body" style="text-align: left;">
+      <div class="mx-auto d-block">
+     
+      <h5 class="text-sm-left mt-2 mb-1"><span class="info_head">Contact:</span> {{visitor.contact_Number}}</h5>
+      <div class="location text-sm-left">
+            <span class="info_head">Last Visit:</span> {{visitor.last_visit}}
+           </div>
+      <div class="location text-sm-left">
+       <span class="info_head">Date Registered:</span> {{visitor.date_Registered}}
+      </div>
+
+      </div>
+      
+      </div>
+      </div>
+{% endfor %}
+      
+{% else %}
+<p style="text-align: center; width: 75%; margin: auto;">No Matching Result Found...</p>
+<br>
+<br>
+<div style="width: 75%; margin: auto; border: 1px solid lightskyblue; text-align: center; display: block; padding: 25px;">
+<p>Hint: Please select another date...</p>
+</div>
+
+
+{% endif %}
+      

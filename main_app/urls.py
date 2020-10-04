@@ -12,5 +12,7 @@ urlpatterns = [
     path('visitor_details_updates/', views.visitor_detail_update_form_handle, name="visitor_details_update"),
     path('profile/update/', OrganizationUpdateView.as_view(), name="org_update_view"),
     path('visit_edit_ajax/', views.ajax_edit_visit, name="ajax_edit_visit"),
-    path('edit_visit_view', EditVisitView.as_view(), name="editVisitView")
+    path('edit_visit_view', EditVisitView.as_view(), name="editVisitView"),
+    path('visitors_by_date/', VisitorsByDateView.as_view(), name="visitor_by_date"),
+    path('ajax_visitor_by_date_call/', views.ajax_visitors_by_date, name="ajax_vis_by_date"),
 ]   

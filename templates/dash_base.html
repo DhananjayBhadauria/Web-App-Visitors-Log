@@ -69,19 +69,25 @@
                 <ul class="list-unstyled navbar__list">
                     <li class="active has-sub">
                         <a class="js-arrow" href="{% url 'dashboard' %}">
-                            <i class="fas fa-tachometer-alt"></i>Dashboard
+                            <i class="fas fa-tachometer-alt"></i>Home
 
                         </a>
 
                     </li>
-                    <li>
-                        <a href="inbox.html">
-                            <i class="fas fa-chart-bar"></i>Inbox</a>
-
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-shopping-basket"></i>eCommerce</a>
+                    <li class="has-sub">
+                        <a class="js-arrow" href="#">
+                            <i class="fas fa-trophy"></i>Stats
+                            <span class="arrow">
+                                <i class="fas fa-angle-down"></i>
+                            </span>
+                        </a>
+                        <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <li>
+                                <a href="{% url 'visitor_by_date' %}">
+                                    <i class="fas fa-table"></i>Visitors by Date</a>
+                            </li>
+                           
+                        </ul>
                     </li>
                 </ul>
             </nav>

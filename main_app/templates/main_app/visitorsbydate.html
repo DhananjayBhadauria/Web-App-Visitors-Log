@@ -1,0 +1,89 @@
+{% extends 'dash_base.html' %}
+
+
+{% block title %}
+Visitors by Date
+{% endblock title %}
+
+
+{% block content %}
+<div class="container-fluid">
+   
+      <div class="row">
+            <div class="col-md-12">
+                  <h3 class="text-info text-center">Visitors by Date...</h3>
+
+
+                  <form  style="width: 70%; margin: auto;">
+<label>Select a date to fetch visitors</label>
+<input type="date" class="form-control form-control-lg" id="visbyd">
+                      </form>
+
+            </div>
+
+
+
+
+<!-- 
+by defualt search box is display none when date selected its display property changes -->
+            <div id="vis_by_date_search_row" style="width: 100%; margin: auto; display: none;"  >
+                  <div class="col-md-12" style="padding-left: 5px; padding-right: 5px;">
+                      <div class="card " style="background-color: #e5e5e5;">
+                          <div class="card-header">
+                          <strong class="card-title">Search Results...</strong>
+                          </div>
+                          <div class="card-body">
+                              <div id="visbydata_content" class="row">
+                              hello world  kjfks kjfkdsa jfkdsjf kdsjfkdsjf kdjfk djfkd jfkdsj fkldjfkldsj fkldsjfkldsjf klj
+                              </div>
+                          </div>
+                          </div>
+                  </div>
+                  
+                  
+                  </div>
+
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<script>
+      $('document').ready(function(){
+            $('#visbyd').change(function(){
+                  
+                  $.ajax({
+                        type:'POST',
+                        url:"{% url 'ajax_vis_by_date' %}",
+                        data: {'date':$(this).val(),
+                        csrfmiddlewaretoken: "{{csrf_token}}"
+                        },
+                        success: function(msg){
+                              $('#vis_by_date_search_row').show();
+                              $('#visbydata_content').html(msg);
+                        }
+                  
+            })
+            })
+      })
+</script>
+{% endblock content %}
