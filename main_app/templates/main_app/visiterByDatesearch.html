@@ -1,5 +1,11 @@
 <!-- this page will display the ajax search result of date selected by user to get visiotor and added to visiter by date page using html -->
 {% if visitors %}
+<div class="row" style="width: 100%; text-align: center;">
+      <div class="col-md-12">
+            Total Visitors Registered on {{date_sel|date:"d M, Y" }} : {{visitors.count}}
+      </div>
+   
+</div>
 {% for visitor in visitors %}
 
 <div class="card " id="visitor_search_card" >

@@ -12,6 +12,7 @@ from django.utils import timezone
 from django.urls import reverse
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+import datetime
 # Create your views here.
 
 
@@ -240,16 +241,25 @@ def change_password(request):
 class VisitorsByDateView(View):
 
     def get(self, request):
-        return render(request, 'main_app/visitorsbydate.html')
+        form = VisitorForm() #visitors form
+        context = {
+            'form':form
+        }
+        return render(request, 'main_app/visitorsbydate.html', context)
 
 
 def ajax_visitors_by_date(request):
     if request.method == "POST":
             
         sel_date = request.POST.get('date')
+        date_sel = datetime.datetime.strptime(sel_date, '%Y-%m-%d').date()
+        print(date_sel)
         visitors = Visitor.objects.filter(Organization = request.user.profile, 
         date_Registered__date = sel_date)
+        form = VisitorForm() #visitors form
         context = {
-            'visitors':visitors
+            'visitors':visitors,
+            'date_sel':date_sel,
+            'form':form
         }
         return render(request, 'main_app/visiterByDatesearch.html', context)
