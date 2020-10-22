@@ -190,3 +190,13 @@ transition: 0.1s;
     width: 95%; margin: auto;
 }
 }
+
+.js-sidebar-btn{
+    display: none;
+}
+
+@media screen and (max-width:995px){
+    .js-sidebar-btn{
+        display: inline-block;
+    }
+}
